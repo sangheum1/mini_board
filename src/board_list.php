@@ -5,16 +5,6 @@
     $http_method = $_SERVER["REQUEST_METHOD"];    // get방식 post 이든 배열 온것을 담아 주는것
     $arr_get = $_GET;
 
-    // if( $http_method === "GET" )
-    // {
-    //     $arr_get = $_GET;
-    //     $page_num = $arr_get["page_num"];
-    // }
-    // else
-    // {
-    //     $page_num = 1;
-    // }
-
     if( array_key_exists( "page_num", $_GET ) )  // 해당키의 배열이 변수에 있나 없나 체크해서 있으면 쓰고 없으면 세팅 안함;
     {
         $page_num = $_GET["page_num"];
@@ -47,7 +37,6 @@
     // var_dump( $result_cnt );
 
 ?>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -64,7 +53,7 @@
     <div class="cont1">
         <table class="table table-striped">
             <thead>
-                <tr>
+                <tr class="table_title">
                     <th>게시글 번호</th>
                     <th>게시글 제목</th>
                     <th>작성일자</th>
@@ -75,9 +64,9 @@
                     foreach( $result_paging as $recode )
                     {
                 ?>
-                    <tr>
+                    <tr class="table_content">
                         <td><?php echo $recode["board_no"] ?></td>
-                        <td><?php echo $recode["board_title"] ?></td>
+                        <td><a href="board_update.php?board_no=<?php echo $recode["board_no"] ?>"><?php echo $recode["board_title"] ?></a></td>
                         <td><?php echo $recode["board_write_date"] ?></td>
                     </tr>
                 <?php
@@ -86,13 +75,34 @@
             </tbody>
         </table>
     </div>
+    <div class="cont2">
+    <?php
+        if( $page_num != 1 )
+        {
+            $previous_page = $page_num -1; ?>
+            <a href="board_list.php?page_num=<?php echo $previous_page ?>" class="page_border">이전</a>
+    <?php
+        }
+    ?>
+
     <?php
         for( $i = 1; $i <= $max_page_num; $i++ )
         {
     ?>
-            <a href='board_list.php?page_num=<?php echo $i ?>'><?php echo $i ?></a>                    <!-- gap 방식으로 페이지 보냄(사용자한테 보임) <>post 방식은 사용자한테 안보이게 보냄 -->
+            <a href="board_list.php?page_num=<?php echo $i ?>" class="page_border"><?php echo $i ?></a>                  <!-- gap 방식으로 페이지 보냄(사용자한테 보임) <>post 방식은 사용자한테 안보이게 보냄 -->
     <?php
         }
     ?>
+
+<?php
+        if( $page_num != $max_page_num )
+        {
+            $next_page = $page_num +1; ?>
+            <a href="board_list.php?page_num=<?php echo $next_page ?>" class="page_border">다음</a>
+    <?php
+        }
+    ?>
+    </div>
+    
 </body>
 </html>

@@ -99,7 +99,92 @@ function select_board_info_cnt()
     return $result;
 }
 
+function select_board_info_no( &$param_no )               // 게시판 특정 게시글 레코드 검색
+{
+    $sql = 
+        " SELECT "
+        ." board_no "
+        ." , board_title "
+        ." , board_contents "
+        ." FROM "
+        ." board_info "
+        ." where "
+        ." board_no = :board_no "
+        ;
+    
+    $arr_prepare =
+        array(
+            ":board_no" => $param_no
+        );
 
+        $conn = null;
+        try
+        {
+            db_conn( $conn );
+            $stmt = $conn->prepare( $sql );
+            $stmt->execute( $arr_prepare );
+            $result = $stmt->fetchAll();
+        }
+        catch( exception $e )
+        {
+            return $e->getMessage();
+        }
+        finally // 에러가 나면 catch 작동후 finally 작동함 (return $result는 작동안함)
+        {
+            $conn = null;
+        }
+    
+        return $result[0]; //2차원 배열이라 1차원 배열 하나만 받기 위해 키값까지 하나 적음
+}
+
+function update_board_info_no( &$param_arr )  // 게시판 특정 게시글 정보 수정(post로 받은값이 board_no,title,name 여러개라서 array로 받기)
+{
+    $sql =
+        " UPDATE "
+        ." board_info "
+        ." set "
+        ." board_title = :board_title "
+        ." , board_contents = :board_contents "
+        ." where "
+        ." board_no = :board_no "
+        ;
+    $arr_prepare =
+        array(
+            ":board_title" => $param_arr["board_title"]
+            , ":board_contents" => $param_arr["board_contents"]
+            , ":board_no" => $param_arr["board_no"]
+        );
+
+    $conn = null;
+    try
+    {
+        db_conn( $conn );
+        $conn->beginTransaction(); // Transaction 시작( 커밋이나 롤백 있으면 자동 종료 )
+        $stmt = $conn->prepare( $sql );
+        $stmt->execute( $arr_prepare );
+        $result_cnt = $stmt->rowCount();  // update는 update한 개수를 들고와야 하기때문에 count 쓰기
+        $conn->commit(); // update를 하기때문에 저장해야함
+    }
+    catch( exception $e )
+    {
+        $conn->rollback(); // return 전에 나와야함
+        return $e->getMessage();
+    }
+    finally // 에러가 나면 catch 작동후 finally 작동함 (return $result는 작동안함)
+    {
+        $conn = null;
+    }
+
+    return $result_cnt;
+}
+
+// $arr = 
+//     array(
+//         "board_no" => 1
+//         , "board_title" => "test1"
+//         , "board_contents" => "testtest1"
+//     );
+// echo update_board_info_no( $arr );
 
 
 
