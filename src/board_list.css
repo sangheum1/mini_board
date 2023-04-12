@@ -7,7 +7,7 @@ html {
 body {
     margin: 0;
     width: 100%;
-    background-color: rgba(128, 128, 128, 0.39);
+    background-color: rgba(150, 214, 243, 0.39);
 }
 .cont1 {
     width: 70%;
@@ -41,5 +41,13 @@ body {
 }
 .table_content {
     text-align: center;
-    background-color: beige;
+    background-color: white;
+}
+p {
+    font-size: 100px;
+    width: 500px;
+    margin: auto;
+    padding-top: 3%;
+    text-align: center;
+    padding-bottom: 8%;
 }

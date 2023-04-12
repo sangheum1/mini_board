@@ -51,6 +51,7 @@
 </head>
 <body>
     <div class="cont1">
+        <p>게시판</p>
         <table class="table table-striped">
             <thead>
                 <tr class="table_title">
@@ -66,7 +67,7 @@
                 ?>
                     <tr class="table_content">
                         <td><?php echo $recode["board_no"] ?></td>
-                        <td><a href="board_update.php?board_no=<?php echo $recode["board_no"] ?>"><?php echo $recode["board_title"] ?></a></td>
+                        <td><a href="board_detail.php?board_no=<?php echo $recode["board_no"] ?>"><?php echo $recode["board_title"] ?></a></td>
                         <td><?php echo $recode["board_write_date"] ?></td>
                     </tr>
                 <?php

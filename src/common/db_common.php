@@ -106,6 +106,7 @@ function select_board_info_no( &$param_no )               // 게시판 특정 �
         ." board_no "
         ." , board_title "
         ." , board_contents "
+        ." , board_write_date " // 0412 작성일 추가
         ." FROM "
         ." board_info "
         ." where "
@@ -175,6 +176,44 @@ function update_board_info_no( &$param_arr )  // 게시판 특정 게시글 정�
         $conn = null;
     }
 
+    return $result_cnt;
+}
+
+function delete_board_info_no( &$param_no ) // 게시판 특정 게시글 정보 삭제
+{
+    $sql =
+        " update "
+        ." board_info "
+        ." set "
+        ." board_del_flg = '1' "
+        ." , board_del_date = now() "
+        ." where "
+        ." board_no = :board_no "
+        ;
+    $arr_prepare =
+        array(
+            "board_no" => $param_no
+        );
+    
+    $conn = null;
+    try
+    {
+        db_conn( $conn );
+        $conn->beginTransaction();
+        $stmt = $conn->prepare( $sql );
+        $stmt->execute( $arr_prepare );
+        $result_cnt = $stmt->rowCount(); // update 개수 체크
+        $conn->commit();
+    }
+    catch ( exception $e)
+    {
+        $conn->rollback();
+        return $e->getMessage();
+    }
+    finally
+    {
+        $conn = null;
+    }
     return $result_cnt;
 }
 

@@ -30,8 +30,11 @@
         $result_cnt = update_board_info_no( $arr_info );
 
         // update한 값들을 화면에 띄우기
-        $result_info = select_board_info_no( $arr_post["board_no"] );
-        // print_r( $_POST );
+        // $result_info = select_board_info_no( $arr_post["board_no"] ); // 0412 delete
+
+        // 위에 커리 업데이트 후 detail페이지의 board_no 페이지로 넘어가는 방법
+        header( "Location: board_detail.php?board_no=".$arr_post["board_no"] );
+        exit(); // 36행에서 redirect 했기 때문에 exit 이후의 코드들은 실행할 필요가 없다.
     }
 ?>
 
@@ -42,23 +45,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="./board_update.css">
 </head>
 <body>
     <section class="cont1">
-        <form method="post" action="board_update.php">  <!-- input값 가져오기 위해 input에서 name은 넘겨주는 컬럼이기때문에 사용-->
-        <label for="bno">게시글 번호 : </label>
-        <input type="text" name="board_no" class="board_no" id="bno" value="<?php echo $result_info['board_no'] ?>" readonly > <!--readonly는 value 값 변경x or 값에다 1적으면 안바뀜-->
-        <br>
-        <label for="title">게시글 제목 : </label>
-        <input type="text" name="board_title" class="board_title" id="title" value="<?php echo $result_info['board_title'] ?>">
-        <br>
-        <label for="contents" class="board_contents_label">게시글 내용 : </label>
-        <input type="text" name="board_contents" class="board_contents" id="contents" value="<?php echo $result_info['board_contents'] ?>">
-        <br>
-        <button type="submit">수정</button>
-        <button type="button" onclick="location.href='http://localhost/mini_board/src/board_list.php?' " >돌아가기</button>
-        </form>
+        <p>수정페이지</p>
+        <div class="cont2">
+            <form method="post" action="board_update.php">  <!-- input값 가져오기 위해 input에서 name은 넘겨주는 컬럼이기때문에 사용-->
+            <label for="bno">게시글 번호 : </label>
+            <input type="text" name="board_no" class="board_no" id="bno" value="<?php echo $result_info['board_no'] ?>" readonly > <!--readonly는 value 값 변경x or 값에다 1적으면 안바뀜-->
+            <br>
+            <div class="label_cont1">
+                <label for="title">게시글 제목 : </label>
+                <input type="text" name="board_title" class="board_title" id="title" value="<?php echo $result_info['board_title'] ?>">
+            </div>
+            <label for="contents" class="bd_con">게시글 내용 : </label>
+            <input type="text" name="board_contents" class="board_contents" id="contents" value="<?php echo $result_info['board_contents'] ?>">
+            </form>
+        </div>
+            <br>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="submit" class="btn btn-info">수정</button>
+            <button type="button" class="btn btn-info" onclick="location.href='board_detail.php?board_no=<?php echo $result_info["board_no"]?>' " >취소</button>
+            <button type="button" class="btn btn-info" onclick="location.href='board_list.php?' " >홈</button>
+        </div>
     </section>
 </body>
 </html>
