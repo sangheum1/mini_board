@@ -1,6 +1,7 @@
 <?php
-    define( "DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]."/" );  // define( 정의하는 변수, 변수에 들어가는 값 )
-    define( "URL_DB", DOC_ROOT."mini_board/src/common/db_common.php" );
+    define( "DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]."/mini_board/src/" );  // define( 정의하는 변수, 변수에 들어가는 값 )
+    define( "URL_DB", DOC_ROOT."common/db_common.php" );
+    define( "URL_HEADER", DOC_ROOT."board_header.php" );
     include_once( URL_DB );
     $http_method = $_SERVER["REQUEST_METHOD"];    // get방식 post 이든 배열 온것을 담아 주는것
     $arr_get = $_GET;
@@ -50,8 +51,9 @@
     <link rel="stylesheet" href="./board_list.css">
 </head>
 <body>
+    <?php include_once( URL_HEADER ) ?>
     <div class="cont1">
-        <p>게시판</p>
+        <button type="button" class="board_insert"><a href="board_insert.php" >게시글 작성</a></button>
         <table class="table table-striped">
             <thead>
                 <tr class="table_title">

@@ -62,6 +62,7 @@
             </div>
             <label for="contents" class="bd_con">게시글 내용 : </label>
             <input type="text" name="board_contents" class="board_contents" id="contents" value="<?php echo $result_info['board_contents'] ?>">
+            
             </form>
         </div>
             <br>

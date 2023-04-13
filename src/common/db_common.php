@@ -217,6 +217,54 @@ function delete_board_info_no( &$param_no ) // 게시판 특정 게시글 정보
     return $result_cnt;
 }
 
+function insert_board_info(&$param_arr)
+{
+    $sql =
+        " INSERT into "
+        ." board_info( "
+        ." board_title "
+        ." , board_contents "
+        ." , board_write_date "
+        ." ) "
+        ." VALUES( "
+        ." :board_title "
+        ." , :board_contents "
+        ." , now() "
+        ." ) "
+        ;
+    
+    $arr_prepare =
+    array(
+        ":board_title" => $param_arr["board_title"]
+        , ":board_contents" => $param_arr["board_contents"]
+    );
+
+    $conn = null;
+    try
+    {
+        db_conn( $conn );
+        $conn->beginTransaction();
+        $stmt = $conn->prepare( $sql );
+        $stmt->execute( $arr_prepare );
+        $result_cnt = $stmt->rowCount(); // update 개수 체크
+        $conn->commit();
+    }
+    catch ( exception $e)
+    {
+        $conn->rollback();
+        return $e->getMessage();
+    }
+    finally
+    {
+        $conn = null;
+    }
+    return $result_cnt;
+
+}
+
+// $arr = array("board_title" => "5", "board_contents" => "fdfdzsf");
+// echo insert_board_info($arr);
+
 // $arr = 
 //     array(
 //         "board_no" => 1

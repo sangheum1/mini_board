@@ -9,10 +9,6 @@ body {
     height: 100%;
     background-color: rgba(150, 214, 243, 0.39);
 }
-form {
-    width: 400px;
-    margin: auto;
-}
 .cont1 {
     background-color: #ffffff;
     width: 55%;
@@ -20,14 +16,33 @@ form {
     text-align: center;
     padding-top: 2%;
     margin: auto;
-    position: relative;
 }
-.board_no {
+button {
+    width: 58px;
+    height: 38px;
+}
+.board_title {
     width: 200px;
     height: 30px;
     margin: 3px;
 }
-.board_title {
+.board_contents {
+    width: 200px;
+    height: 350px;
+    margin: 3px;
+}
+
+/* P {
+    position: relative;
+    
+} */
+
+
+
+
+
+
+/* .board_no {
     width: 200px;
     height: 30px;
     margin: 3px;
@@ -49,14 +64,6 @@ form {
     padding-top: 8px;
 
 }
-.btn-group {
-    position: relative;
-    bottom: 1%;
-    right: -35%;
-}
 p {
     font-size: 40px;
-}
-.btn btn-info {
-    color: red;
 }

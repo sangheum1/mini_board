@@ -7,6 +7,6 @@
 
     $result_cnt = delete_board_info_no( $arr_get["board_no"] );
 
-    header( "Location: board_list.php" );
-    exit();
+    header( "Location: board_list.php" ); // 화면을 이동시키기 위해 사용
+    exit(); // 이동시키고 아무것도 할필요 없어서 종료
 ?>
