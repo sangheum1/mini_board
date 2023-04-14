@@ -1,6 +1,7 @@
 <?php
-    define( "DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]."/" );  // define( 정의하는 변수, 변수에 들어가는 값 )
-    define( "URL_DB", DOC_ROOT."mini_board/src/common/db_common.php" );
+    define( "DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]."/mini_board/src/" );  // define( 정의하는 변수, 변수에 들어가는 값 )
+    define( "URL_DB", DOC_ROOT."common/db_common.php" );
+    define( "URL_HEADER", DOC_ROOT."board_header.php" );
     include_once( URL_DB ); // PHP에서 INCLUDE 할때는 절대주소로 넣기(상대주소는 넣기힘듬)
 
     $http_method = $_SERVER["REQUEST_METHOD"]; // Request Method를 획득 ( 적은 모든 정보들을 get, POST방식(암호화)으로 SESSION에 저장됨 )
@@ -49,6 +50,7 @@
     <link rel="stylesheet" href="./board_update.css">
 </head>
 <body>
+    <?php include_once( URL_HEADER ) ?>
     <section class="cont1">
         <p>수정페이지</p>
         <div class="cont2">
@@ -58,19 +60,19 @@
             <br>
             <div class="label_cont1">
                 <label for="title">게시글 제목 : </label>
-                <input type="text" name="board_title" class="board_title" id="title" value="<?php echo $result_info['board_title'] ?>">
+                <input type="text" name="board_title" class="board_title" id="title" value="<?php echo $result_info['board_title'] ?>" required >
             </div>
             <label for="contents" class="bd_con">게시글 내용 : </label>
-            <input type="text" name="board_contents" class="board_contents" id="contents" value="<?php echo $result_info['board_contents'] ?>">
-            
-            </form>
-        </div>
-            <br>
-        <div class="btn-group" role="group" aria-label="Basic example">
+            <input type="text" name="board_contents" class="board_contents" id="contents" value="<?php echo $result_info['board_contents'] ?>" required >
+            <div class="btn-group" role="group" aria-label="Basic example">
             <button type="submit" class="btn btn-info">수정</button>
             <button type="button" class="btn btn-info" onclick="location.href='board_detail.php?board_no=<?php echo $result_info["board_no"]?>' " >취소</button>
             <button type="button" class="btn btn-info" onclick="location.href='board_list.php?' " >홈</button>
         </div>
+            </form>
+        </div>
+            <br>
+        
     </section>
 </body>
 </html>

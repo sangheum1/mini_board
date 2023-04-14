@@ -1,6 +1,7 @@
 <?php
-    define( "DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]."/" );  // define( 정의하는 변수, 변수에 들어가는 값 )
-    define( "URL_DB", DOC_ROOT."mini_board/src/common/db_common.php" );
+    define( "DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]."/mini_board/src/" );  // define( 정의하는 변수, 변수에 들어가는 값 )
+    define( "URL_DB", DOC_ROOT."common/db_common.php" );
+    define( "URL_HEADER", DOC_ROOT."board_header.php" );
     include_once( URL_DB );
 
     $http_method = $_SERVER["REQUEST_METHOD"];
@@ -26,16 +27,17 @@
     <link rel="stylesheet" href="./board_update.css">
 </head>
 <body>
+<?php include_once( URL_HEADER ) ?>
 <section class="cont1">
         <p>게시글 작성</p>
         <div class="cont2">
             <form method="post" action="board_insert.php">  <!-- input값 가져오기 위해 input에서 name은 넘겨주는 컬럼이기때문에 사용-->
             <div class="label_cont1">
-                <label for="title">제목</label>
-                <input type="text" name="board_title" class="board_title" id="title">
+                <label for="title">제목 : </label>
+                <input type="text" name="board_title" class="board_title" id="title" required>
             </div>
-            <label for="contents" class="bd_con">내용</label>
-            <input type="text" name="board_contents" class="board_contents" id="contents">
+            <label for="contents" class="bd_con">내용 : </label>
+            <input type="text" name="board_contents" class="board_contents" id="contents" required>
             <br>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="submit" class="btn btn-info">작성</button>

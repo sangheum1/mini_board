@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 html {
     background-size: cover;
     height: 100%;
@@ -8,6 +14,7 @@ body {
     margin: 0;
     width: 100%;
     background-color: rgba(150, 214, 243, 0.39);
+    font-family: 'Cafe24Ssurround';
 }
 .cont1 {
     width: 70%;
@@ -43,7 +50,7 @@ body {
 .board_insert {
     position: absolute;
     right: 15%;
-    top: 25%;
+    top: 22%;
     width: 120px;
     height: 50px;
     border-style: none;

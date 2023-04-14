@@ -97,7 +97,7 @@
         }
     ?>
 
-<?php
+    <?php
         if( $page_num != $max_page_num )
         {
             $next_page = $page_num +1; ?>
@@ -107,5 +107,58 @@
     ?>
     </div>
     
+
+
+
+
+
+
+
+    <!-- 검색 기능 구현 -->
+    <div class="search">
+        <form method="get" action="board_list.php">
+            <input type="text" name="search" required>
+            <select name="option">
+                <option value="title">게시글 제목</option>
+            </select>
+            <input type="submit" value="검색">
+        </form>
+    </div>
+    <?php
+        $arr_get1 = $_GET["search"];
+        $sql_1 = 
+            " SELECT "
+            ." board_no "
+            ." , board_title "
+            ." , board_contents "
+            ." from "
+            ." board_info "
+            ." where "
+            ." board_title = :board_title "
+            ;
+        $arr_prepare_1 = 
+            array(
+                ":board_title" => $arr_get1
+            );
+
+        $conn = null;
+        try
+        {
+            db_conn( $conn );
+            $stmt = $conn->prepare( $sql_1 );
+            $stmt->execute( $arr_prepare_1 );
+            $result_1 = $stmt->fetchAll();
+        }
+        catch( exception $e )
+        {
+            return $e->getMessage();
+        }
+        finally
+        {
+            $conn = null;
+        }
+        print_r ($result_1);
+        return $result_1;
+    ?>
 </body>
 </html>

@@ -6,13 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+    @font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
     h1 {
         font-size: 100px;
         width: 800px;
         margin: auto;
         padding-top: 3%;
         text-align: center;
-        padding-bottom: 8%;
+        padding-bottom: 5%;
+        font-family: 'Cafe24Ssurround';
     }
     .board_headline {
         text-decoration: none;

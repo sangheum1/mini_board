@@ -1,6 +1,7 @@
 <?php
-    define( "DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]."/" );  // define( 정의하는 변수, 변수에 들어가는 값 )
-    define( "URL_DB", DOC_ROOT."mini_board/src/common/db_common.php" );
+    define( "DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]."/mini_board/src/" );  // define( 정의하는 변수, 변수에 들어가는 값 )
+    define( "URL_DB", DOC_ROOT."common/db_common.php" );
+    define( "URL_HEADER", DOC_ROOT."board_header.php" );
     include_once( URL_DB );
 
     // request parameter 획득(get)
@@ -23,25 +24,21 @@
     <link rel="stylesheet" href="./board_detail.css">
 </head>
 <body>
+    <?php include_once( URL_HEADER ) ?>
     <div class="cont1">
-        <p>작성일 : <?php echo $result_info["board_write_date"] ?></p>
-        <!-- <p>게시글 번호 : <?php echo $result_info["board_no"] ?></p> -->
+        <p class="write_date">작성일 : <?php echo $result_info["board_write_date"] ?></p>
+        <p class=detail_title>상세 페이지</p>
         <label for="bno">게시글 번호 : </label>
         <input type="text" name="board_title" class="board_title" id="bno" value="<?php echo $result_info["board_no"] ?>" readonly>
         <br>
-        <!-- <label for="bno">  작성일 : </label>
-        <input type="text" name="board_title" class="board_title" id="bno" value="<?php echo $result_info["board_write_date"] ?>" readonly>
-        <br> -->
         <label for="bno">게시글 제목 : </label>
         <input type="text" name="board_title" class="board_title" id="bno" value="<?php echo $result_info["board_title"] ?>" readonly>
         <br>
-        <!-- <p>게시글 제목 : <?php echo $result_info["board_title"] ?></p> -->
-        <label for="bno">게시글 내용 : </label>
+        <label for="bno" class="label_contents">게시글 내용 : </label>
         <input type="text" name="board_title" class="board_contents" id="bno" value="<?php echo $result_info["board_contents"] ?>" readonly>
-        <!-- <p>게시글 내용 : <?php echo $result_info["board_contents"] ?></p> -->
     </div>
     <br>
-    <div>
+    <div class="button_cont">
         <button type="button"><a href="board_update.php?board_no=<?php echo $result_info["board_no"] ?>">수정</a></button>
         <button type="button"><a href="board_delete.php?board_no=<?php echo $result_info["board_no"] ?>">삭제</button>
     </div>
