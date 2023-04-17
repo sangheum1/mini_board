@@ -72,33 +72,3 @@ button {
     border-radius: 0.3vw;
 }
 
-
-
-
-
-
-/* .board_no {
-    width: 200px;
-    height: 30px;
-    margin: 3px;
-}
-.board_contents {
-    width: 200px;
-    height: 350px;
-    margin: 3px;
-}
-.bd_con {
-    position: relative; 
-    bottom: 165px;
-}
-.cont2 {
-    width: 500px;
-    margin: auto;
-    text-align: center;
-    border-top: 2px solid black;
-    padding-top: 8px;
-
-}
-p {
-    font-size: 40px;
-}

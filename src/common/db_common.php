@@ -262,16 +262,6 @@ function insert_board_info(&$param_arr)
 
 }
 
-// $arr = array("board_title" => "5", "board_contents" => "fdfdzsf");
-// echo insert_board_info($arr);
-
-// $arr = 
-//     array(
-//         "board_no" => 1
-//         , "board_title" => "test1"
-//         , "board_contents" => "testtest1"
-//     );
-// echo update_board_info_no( $arr );
 
 
 
@@ -285,6 +275,17 @@ function insert_board_info(&$param_arr)
 // $result = select_board_info_paging( $arr );
 
 // print_r( $result );
+
+// $arr = array("board_title" => "5", "board_contents" => "fdfdzsf");
+// echo insert_board_info($arr);
+
+// $arr = 
+//     array(
+//         "board_no" => 1
+//         , "board_title" => "test1"
+//         , "board_contents" => "testtest1"
+//     );
+// echo update_board_info_no( $arr );
 
 // todo : test end
 
